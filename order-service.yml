@@ -18,12 +18,14 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    
 
   cloud:
     openfeign:
       circuitbreaker:
         enabled: true
+
+  zipkin:
+    base-url: http://localhost:9411
 
 eureka:
   client:
@@ -35,6 +37,9 @@ management:
     web:
       exposure:
         include: "*"
+  tracing:
+    sampling:
+      probability: 1.0
 
 resilience4j:
   circuitbreaker:
@@ -45,13 +50,3 @@ resilience4j:
         failureRateThreshold: 50
         waitDurationInOpenState: 10s
         permittedNumberOfCallsInHalfOpenState: 3
-
-
-management:
-  tracing:
-    sampling:
-      probability: 1.0
-
-spring:
-  zipkin:
-    base-url: http://localhost:9411
